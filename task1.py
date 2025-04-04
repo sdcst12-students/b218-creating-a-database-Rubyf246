@@ -10,48 +10,6 @@ query = "select sqlite_version();"
 query = "drop table if exists customers"
 cursor.execute(query)
 
-<<<<<<< HEAD
-query = """create table customers
-( 
-id integer primary key autoincrement, 
-fname tinytext,
-lname tinytext, 
-phone int,
-email int, 
-address int,
-city tinytext,
-postalcode int); """
-cursor.execute(query)
-
-
-query = "drop table if exists pets"
-cursor.execute(query)
-
-query = """create table pets
-( 
-id integer primary key autoincrement, 
-pname tinytext,
-type tinytext, 
-breed tinytext,
-birthdate int, 
-ownerID int); """
-cursor.execute(query)
-
-query = "drop table if exists visits"
-cursor.execute(query)
-
-query = """create table visits
-( 
-id integer primary key autoincrement, 
-pname tinytext,
-type tinytext, 
-breed tinytext,
-birthdate int, 
-ownerID int); """
-cursor.execute(query)
-
-
-=======
 query = "drop table if exists pets"
 cursor.execute(query)
 
@@ -155,37 +113,30 @@ result = cursor.fetchall()
 print ("----------------Initial Visits:------------------");
 for i in result:
     print(i)
+
+
+
     
     
 #################  Add a new customer ###################
 print ("\n----------------Add a customer :------------------");    
 
-inpt_fname = input("Enter first name: ")
-inpt_lname = input("Enter last name: ")
-inpt_ph = input("Enter phone: ")
-inpt_email = input("Enter email: ")
-inpt_addr = input("Enter address: ")
-inpt_city = input("Enter city: ")
-inpt_pcode = input("Enter postal code: ")
 
 def insert_customer (fname, lname, ph, email, addr, city, pcode):
     cur = connection.cursor()
     cur.execute("insert into customers (fname, lname, phone, email,  address, city, postalcode) values (?,?,?,?,?,?,?);", (fname, lname, ph, email, addr, city, pcode))
     connection.commit()
 
-    
-insert_customer(inpt_fname,inpt_lname, inpt_ph ,inpt_email, inpt_addr,inpt_city,inpt_pcode)
 
 query = "select * from customers"
 cursor.execute(query)
 result = cursor.fetchall()
 
-print ("\n----------------After Adding New Customer:------------------");
+print ("\n----------------After Adding New Customer:------------------")
 
 for i in result:
     print(i)
-    
-    
+
 #################  Search by email ###################   
 
 def search_customer_by_email (email): 
@@ -198,7 +149,17 @@ def search_customer_by_email (email):
         print("First Name = ", row[1])
         print("Last Name  = ", row[2])
     cursor.close()
- 
-inpt_email = input("Enter email: ")  
-search_customer_by_email (inpt_email)  
->>>>>>> 6349b0e6dc7b7542eebdd9e0dbe0b55cc81638c0
+
+
+    
+##################  Ask which function they want to excute  ################
+
+choice = input("Input your choice (search/add) ---->    ")
+if choice == "search":
+    search_customer_by_email (inpt_email = input("Enter email: "))
+else: 
+    insert_customer(inpt_fname = input("Enter first name: "), inpt_lname = input("Enter last name: "), inpt_ph = input("Enter phone: "), inpt_email = input("Enter email: "), inpt_addr = input("Enter address: "), inpt_city = input("Enter city: "), inpt_pcode = input("Enter postal code: "))
+
+
+
+
